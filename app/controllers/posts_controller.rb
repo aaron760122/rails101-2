@@ -4,7 +4,13 @@ class PostsController < ApplicationController
 
   def new
     @group = Group.find(params[:group_id])
-    @post = Post.new
+    if !current_user.is_member_of?(@group)
+      flash[:alert] = "先加入讨论版才能Write a Post!"
+      redirect_to group_path(@group)
+    else
+      @post = Post.new
+    end
+
   end
 
   def create
