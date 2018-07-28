@@ -4,4 +4,5 @@ class Account::GroupsController < ApplicationController
   def index
     @group = current_user.participated_groups
   end
+
 end
